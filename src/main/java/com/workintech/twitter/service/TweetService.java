@@ -11,6 +11,8 @@ public interface TweetService {
     
     List<TweetResponse> findByUserId(Long userId);
     
+    List<TweetResponse> findAll();
+    
     TweetResponse findById(Long id);
     
     TweetResponse updateTweet(Long id, TweetRequest request, String username);

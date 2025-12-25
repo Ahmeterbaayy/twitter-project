@@ -4,6 +4,7 @@ import Login from './components/Login';
 
 function App() {
   const [user, setUser] = useState(null);
+  const [view, setView] = useState('feed'); // 'feed' veya 'myTweets'
 
   const handleLogin = (userData) => {
     setUser(userData);
@@ -28,19 +29,45 @@ function App() {
             <div className="hidden sm:flex items-center gap-2 text-gray-700">
               <span className="font-semibold">{user.username}</span>
             </div>
-            <button 
-              onClick={handleLogout} 
-              className="border border-gray-300 text-gray-700 px-4 py-2 rounded-full font-semibold hover:bg-gray-50 transition-all"
-            >
-              Çıkış Yap
-            </button>
+            <div className="flex gap-2">
+              <button 
+                onClick={() => setView('feed')}
+                className={`px-4 py-2 rounded-full font-semibold transition-all ${
+                  view === 'feed' 
+                    ? 'bg-twitter-blue text-white' 
+                    : 'border border-gray-300 text-gray-700 hover:bg-gray-50'
+                }`}
+              >
+                Ana Sayfa
+              </button>
+              <button 
+                onClick={() => setView('myTweets')}
+                className={`px-4 py-2 rounded-full font-semibold transition-all ${
+                  view === 'myTweets' 
+                    ? 'bg-twitter-blue text-white' 
+                    : 'border border-gray-300 text-gray-700 hover:bg-gray-50'
+                }`}
+              >
+                Tweetlerim
+              </button>
+              <button 
+                onClick={handleLogout} 
+                className="border border-gray-300 text-gray-700 px-4 py-2 rounded-full font-semibold hover:bg-gray-50 transition-all"
+              >
+                Çıkış
+              </button>
+            </div>
           </div>
         )}
       </header>
 
       <main className="max-w-2xl mx-auto my-8 px-4 animate-fadeIn">
         {user ? (
-          <TweetList userId={user.id} username={user.username} />
+          <TweetList 
+            userId={user.id} 
+            username={user.username} 
+            showAllTweets={view === 'feed'}
+          />
         ) : (
           <Login onLogin={handleLogin} />
         )}

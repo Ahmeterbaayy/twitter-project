@@ -28,17 +28,18 @@ export const authAPI = {
 };
 
 export const tweetAPI = {
+  getAllTweets: () => api.get('/tweet/all'),
   getTweetsByUserId: (userId) => api.get(`/tweet/findByUserId?userId=${userId}`),
   getTweetById: (id) => api.get(`/tweet/findById?id=${id}`),
   createTweet: (tweetData) => api.post('/tweet', tweetData),
   updateTweet: (id, tweetData) => api.put(`/tweet/${id}`, tweetData),
-  deleteTweet: (id, userId) => api.delete(`/tweet/${id}?userId=${userId}`),
+  deleteTweet: (id) => api.delete(`/tweet/${id}`),
 };
 
 export const commentAPI = {
   createComment: (commentData) => api.post('/comment', commentData),
   updateComment: (id, commentData) => api.put(`/comment/${id}`, commentData),
-  deleteComment: (id, userId) => api.delete(`/comment/${id}?userId=${userId}`),
+  deleteComment: (id) => api.delete(`/comment/${id}`),
   getCommentsByTweetId: (tweetId) => api.get(`/comment/tweet/${tweetId}`),
 };
 
@@ -49,7 +50,7 @@ export const likeAPI = {
 
 export const retweetAPI = {
   createRetweet: (retweetData) => api.post('/retweet', retweetData),
-  deleteRetweet: (id, userId) => api.delete(`/retweet/${id}?userId=${userId}`),
+  deleteRetweet: (id) => api.delete(`/retweet/${id}`),
 };
 
 export default api;

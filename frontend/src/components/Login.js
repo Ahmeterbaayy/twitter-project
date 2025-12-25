@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { authAPI } from '../services/api';
 
 function Login({ onLogin }) {
@@ -11,6 +11,11 @@ function Login({ onLogin }) {
   });
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
+
+  // Sayfa yüklendiğinde eski token'ı temizle
+  useEffect(() => {
+    localStorage.removeItem('token');
+  }, []);
 
   const handleChange = (e) => {
     setFormData({

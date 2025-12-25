@@ -36,6 +36,12 @@ public class TweetController {
         return ResponseEntity.ok(tweets);
     }
     
+    @GetMapping("/all")
+    public ResponseEntity<List<TweetResponse>> findAll() {
+        List<TweetResponse> tweets = tweetService.findAll();
+        return ResponseEntity.ok(tweets);
+    }
+    
     @GetMapping("/findById")
     public ResponseEntity<TweetResponse> findById(@RequestParam Long id) {
         TweetResponse tweet = tweetService.findById(id);

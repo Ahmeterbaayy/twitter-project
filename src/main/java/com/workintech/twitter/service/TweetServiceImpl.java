@@ -58,6 +58,15 @@ public class TweetServiceImpl implements TweetService {
     
     @Override
     @Transactional(readOnly = true)
+    public List<TweetResponse> findAll() {
+        List<Tweet> tweets = tweetRepository.findAllByOrderByCreatedAtDesc();
+        return tweets.stream()
+            .map(this::buildTweetResponse)
+            .collect(Collectors.toList());
+    }
+    
+    @Override
+    @Transactional(readOnly = true)
     public TweetResponse findById(Long id) {
         Tweet tweet = tweetRepository.findById(id)
             .orElseThrow(() -> new TwitterException(
